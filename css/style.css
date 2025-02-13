@@ -1,0 +1,10 @@
+.modal-header {
+    text-align: center;
+    margin-bottom: 20px; /* Espacio abajo de la imagen */
+}
+
+.modal-body h5.modal-title {
+    text-align: center;
+    margin-top: 10px; /* Añadir espacio arriba del título */
+    margin-bottom: 10px; /* Añadir espacio abajo del título */
+}
