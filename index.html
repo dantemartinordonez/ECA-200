@@ -11,24 +11,27 @@
             padding: 22px;
             background-color: #0d0d0e;
             color: white;
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: bold;
         }
         .modal-body p, .modal-body h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
         }
         .timer {
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .timer-display {
             font-size: 1.5rem;
             font-weight: bold;
+            margin-bottom: 10px;
         }
         .form-row {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 10px;
         }
         .modal-header {
@@ -47,46 +50,55 @@
             font-weight: bold;
             text-align: center;
         }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+        }
     </style>
 </head>
 <body class="container mt-5">
     <div class="header">
-        <img src="./logo.png" alt="Logo" class="img-fluid mb-3" style="max-width: 300px;">
+        <img src="./logo.png" alt="Logo" class="img-fluid mb-3" style="max-width: 200px;">
         <h2>VERIFICADOR DE MEDIDOR ECA 200</h2>
     </div>
     <form id="calculoForm">
         <div class="mb-3">
-            <label for="pulsos" class="form-label">Pulsos</label>
+            <label for="pulsos" class="form-label">Pulsos (N)</label>
             <input type="number" id="pulsos" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="voltaje" class="form-label">Voltaje</label>
+            <label for="voltaje" class="form-label">Voltaje (V)</label>
             <input type="number" id="voltaje" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="corriente1" class="form-label">Corriente</label>
+            <label for="corriente1" class="form-label">Corriente I1</label>
             <input type="number" id="corriente1" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="k" class="form-label">Constante del Medidor</label>
+            <label for="k" class="form-label">Constante del Medidor (K)</label>
             <input type="number" id="k" class="form-control" value="1000" required>
         </div>
+        <div class="mb-3">
+            <label for="cosFi" class="form-label">Coseno de Fi (CosFi)</label>
+            <input type="number" step="0.01" id="cosFi" class="form-control" value="1" required>
+        </div>
         <div class="form-row mb-3">
-            <label for="t" class="form-label">Tiempo</label>
+            <label for="t" class="form-label">Tiempo (T)</label>
             <input type="number" id="t" class="form-control" required readonly style="width: 150px;">
             
             <!-- Cronómetro -->
             <div class="timer">
                 <div class="timer-display" id="timerDisplay">00:00.000</div>
-                <button type="button" class="btn btn-success" onclick="toggleTimer()">Iniciar / Detener</button>
-                <button type="button" class="btn btn-warning" onclick="resetTimer()">Reiniciar</button>
+                <div class="btn-container">
+                    <button type="button" class="btn btn-success" onclick="toggleTimer()">Iniciar / Detener</button>
+                    <button type="button" class="btn btn-warning" onclick="resetTimer()">Reiniciar</button>
+                </div>
             </div>
         </div>
-        <div class="mb-3">
-            <label for="cosFi" class="form-label">Cos Fi</label>
-            <input type="number" step="0.01" id="cosFi" class="form-control" value="1" required>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="calcular()">Calcular</button>
+
+        <button type="button" class="btn btn-primary w-100" onclick="calcular()">Calcular</button>
     </form>
 
     <div id="resultadoModal" class="modal" tabindex="-1">
@@ -94,7 +106,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <img src="./logo.png" alt="Logo" class="img-fluid mb-3">
-                    <h5 class="modal-title">RESUMEN CALCULO ECA 200</h5>
+                    <h5 class="modal-title">Resumen del Cálculo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
